@@ -2,6 +2,9 @@
 # Main reference: https://github.com/RobotLocomotion/drake-external-examples/blob/main/scripts/setup/linux/ubuntu/jammy/install_prereqs
 # Removed some unused dependencies
 
+# Make the script executable
+chmod +x "$0"
+
 set -euxo pipefail
 
 apt-get update
