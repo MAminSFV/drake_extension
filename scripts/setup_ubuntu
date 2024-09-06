@@ -79,3 +79,6 @@ EOF
 )
 
 locale-gen en_US.UTF-8
+
+# Install pybind11 globally
+pip3 install pybind11[global]
