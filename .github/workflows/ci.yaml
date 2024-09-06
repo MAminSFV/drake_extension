@@ -15,7 +15,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Initial Setup
       run: |
-        sudo ./scripts/setup_ubuntu.bash
+        sudo ./scripts/setup_ubuntu
+      shell: bash
     - name: Build
       run: |
         mkdir build
