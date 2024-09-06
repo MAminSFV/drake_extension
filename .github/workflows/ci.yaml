@@ -13,6 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+     - name: List directory contents
+       run: ls -la scripts/
+     - name: Make setup script executable
+       run: chmod +x ./scripts/setup_ubuntu
     - name: Initial Setup
       run: |
         sudo ./scripts/setup_ubuntu
