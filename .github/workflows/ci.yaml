@@ -35,6 +35,4 @@ jobs:
         source .env/bin/activate
         pip3 install .
         pip3 install pytest
-        pip3 install numpy
-        pip3 install drake
         python3 -m pytest

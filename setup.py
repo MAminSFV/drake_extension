@@ -136,6 +136,7 @@ setup(
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
     extras_require={"test": ["pytest>=6.0"],
-                    "pydrake": ["pydrake>=1.20"]},
+                    "pydrake": ["pydrake>=1.20"],
+                    "numpy": ["numpy"]},
     python_requires=">=3.10",
 )
