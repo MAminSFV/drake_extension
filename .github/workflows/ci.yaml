@@ -37,4 +37,4 @@ jobs:
         pip3 install pytest
         pip3 install numpy
         pip3 install drake
-        python3 -m pytest  .
+        python3 -m pytest
