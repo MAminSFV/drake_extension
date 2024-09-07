@@ -2,22 +2,15 @@
 # Main reference: https://github.com/RobotLocomotion/drake-external-examples/blob/main/scripts/setup/linux/ubuntu/jammy/install_prereqs
 # Removed some unused dependencies
 
-set -euxo pipefail
-DEBIAN_FRONTEND=noninteractive
+set -euxo pipefai
 
 apt-get update
-apt-get install --no-install-recommends -y lsb-release
-
-if [[ "$(lsb_release -sc)" != 'jammy' ]]; then
-  echo 'This script requires Ubuntu 22.04 (Jammy)' >&2
-  exit 3
-fi
-
-apt-get install --no-install-recommends -y $(cat <<EOF
+DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   wget
   gnupg
   cmake
+  lsb-release
   python3-pip
   python3-venv
 EOF
@@ -31,7 +24,7 @@ echo "deb [arch=amd64] https://drake-apt.csail.mit.edu/$(lsb_release -cs) $(lsb_
   | tee /etc/apt/sources.list.d/drake.list >/dev/null
 
 apt-get update
-apt-get install --no-install-recommends -y drake-dev
+DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y drake-dev
 
 export PATH="/opt/drake/bin${PATH:+:${PATH}}"
 export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
