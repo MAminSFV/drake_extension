@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    container: ubuntu:jammy
 
     steps:
     - uses: actions/checkout@v4
@@ -17,8 +17,7 @@ jobs:
       run: chmod +x ./scripts/setup_ubuntu
 
     - name: Initial Setup
-      run: |
-        sudo ./scripts/setup_ubuntu
+      run: ./scripts/setup_ubuntu
       shell: bash
 
     - name: Build
