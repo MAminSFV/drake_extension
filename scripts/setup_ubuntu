@@ -8,6 +8,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
+  build-essential
   wget
   gnupg
   cmake
