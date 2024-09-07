@@ -16,7 +16,9 @@ apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   wget
   gnupg
-
+  cmake
+  python3-pip
+  python3-venv
 EOF
 )
 
@@ -27,40 +29,11 @@ wget -qO- https://drake-apt.csail.mit.edu/drake.asc | gpg --dearmor - \
 echo "deb [arch=amd64] https://drake-apt.csail.mit.edu/$(lsb_release -cs) $(lsb_release -cs) main" \
   | tee /etc/apt/sources.list.d/drake.list >/dev/null
 
+apt-get update
 apt-get install --no-install-recommends -y drake-dev
 
-
-apt-get update
-apt-get install --no-install-recommends -y $(cat <<EOF
-  cmake
-  default-jdk
-  file
-  gfortran
-  git
-  libblas-dev
-  libclang-15-dev
-  libeigen3-dev
-  libgflags-dev
-  libgl-dev
-  libglib2.0-dev
-  libglx-dev
-  liblapack-dev
-  libmumps-seq-dev
-  libopengl-dev
-  libspdlog-dev
-  libx11-dev
-  locales
-  nasm
-  ocl-icd-opencl-dev
-  opencl-headers
-  openssh-client
-  patch
-  patchelf
-  pkg-config
-  python-is-python3
-  zlib1g-dev
-EOF
-)
+export PATH="/opt/drake/bin${PATH:+:${PATH}}"
+export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
 
 locale-gen en_US.UTF-8
 
