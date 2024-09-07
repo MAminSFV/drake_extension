@@ -2,7 +2,7 @@
 # Main reference: https://github.com/RobotLocomotion/drake-external-examples/blob/main/scripts/setup/linux/ubuntu/jammy/install_prereqs
 # Removed some unused dependencies
 
-set -euxo pipefai
+set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
