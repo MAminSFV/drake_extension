@@ -3,9 +3,10 @@
 # Removed some unused dependencies
 
 set -euxo pipefai
+export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y $(cat <<EOF
+apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   wget
   gnupg
@@ -24,7 +25,7 @@ echo "deb [arch=amd64] https://drake-apt.csail.mit.edu/$(lsb_release -cs) $(lsb_
   | tee /etc/apt/sources.list.d/drake.list >/dev/null
 
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y drake-dev
+apt-get install --no-install-recommends -y drake-dev
 
 export PATH="/opt/drake/bin${PATH:+:${PATH}}"
 export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
