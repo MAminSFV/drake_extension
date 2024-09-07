@@ -5,14 +5,14 @@
 set -euxo pipefail
 
 apt-get update
-apt-get install --no-install-recommends lsb-release
+apt-get install --no-install-recommends -y lsb-release
 
 if [[ "$(lsb_release -sc)" != 'jammy' ]]; then
   echo 'This script requires Ubuntu 22.04 (Jammy)' >&2
   exit 3
 fi
 
-apt-get install --no-install-recommends $(cat <<EOF
+apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   wget
 EOF
@@ -28,14 +28,14 @@ echo -e "\ndrake VERSION.TXT: $(cat /opt/drake/share/doc/drake/VERSION.TXT)\n"
 
 /opt/drake/share/drake/setup/install_prereqs
 
-apt-get install --no-install-recommends gnupg
+apt-get install --no-install-recommends -y gnupg
 
 apt-key adv --fetch-keys https://bazel.build/bazel-release.pub.gpg
 echo 'deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8' \
   > /etc/apt/sources.list.d/bazel.list
 
 apt-get update
-apt-get install --no-install-recommends $(cat <<EOF
+apt-get install --no-install-recommends -y $(cat <<EOF
   cmake
   default-jdk
   file
