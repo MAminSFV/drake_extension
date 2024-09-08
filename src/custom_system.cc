@@ -1,7 +1,8 @@
-#include <pybind11/pybind11.h>
+#include <nanobind/nanobind.h>
 #include <drake/systems/framework/leaf_system.h>
 
-namespace py = pybind11;
+namespace nb = nanobind;
+using namespace nb::literals;
 
 using drake::systems::BasicVector;
 using drake::systems::Context;
@@ -30,14 +31,14 @@ class SimpleAdder : public LeafSystem<T> {
   const T add_{};
 };
 
-PYBIND11_MODULE(custom_system, m) {
+NB_MODULE(custom_system, m) {
   m.doc() = "Example module interfacing with pydrake and Drake C++";
 
-  py::module::import("pydrake.systems.framework");
+  nb::module_::import_("pydrake.systems.framework");
 
   using T = double;
 
-  py::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
-      .def(py::init<T>(), py::arg("add"));
+  nb::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
+      .def(nb::init<T>(), nb::arg("add"));
 }
 }  // namespace drake_extension
