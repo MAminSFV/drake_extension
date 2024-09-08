@@ -64,8 +64,6 @@ nanobind_add_module(
 
 target_link_libraries(custom_system PUBLIC drake::drake)
 set_target_properties(custom_system PROPERTIES CXX_VISIBILITY_PRESET default)
-target_compile_definitions(custom_system
-                           PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
 
 # Install directive for scikit-build-core
-install(TARGETS custom_system LIBRARY DESTINATION custom_system)
+install(TARGETS custom_system LIBRARY DESTINATION drake_extension)

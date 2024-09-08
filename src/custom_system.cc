@@ -9,7 +9,6 @@ using drake::systems::Context;
 using drake::systems::LeafSystem;
 using drake::systems::kVectorValued;
 
-namespace drake_extension {
 /// Adds a constant to an input.
 template <typename T>
 class SimpleAdder : public LeafSystem<T> {
@@ -41,4 +40,3 @@ NB_MODULE(custom_system, m) {
   nb::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
       .def(nb::init<T>(), nb::arg("add"));
 }
-}  // namespace drake_extension
