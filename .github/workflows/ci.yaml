@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
-    - name: Make setup script executable
-      run: chmod +x ./scripts/setup_ubuntu
 
     - name: Initial Setup
       run: ./scripts/setup_ubuntu

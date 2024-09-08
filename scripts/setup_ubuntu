@@ -1,11 +1,10 @@
 #!/bin/bash
-# Main reference: https://github.com/RobotLocomotion/drake-external-examples/blob/main/scripts/setup/linux/ubuntu/jammy/install_prereqs
-# Removed some unused dependencies
+# Adapted from https://github.com/RobotLocomotion/drake-external-examples/blob/main/scripts/setup/linux/ubuntu/jammy/install_prereqs
 
 set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
+sudo apt-get update
 apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   build-essential
@@ -26,7 +25,7 @@ wget -qO- https://drake-apt.csail.mit.edu/drake.asc | gpg --dearmor - \
 echo "deb [arch=amd64] https://drake-apt.csail.mit.edu/$(lsb_release -cs) $(lsb_release -cs) main" \
   | tee /etc/apt/sources.list.d/drake.list >/dev/null
 
-apt-get update
+sudo apt-get update
 apt-get install --no-install-recommends -y drake-dev
 
 export PATH="/opt/drake/bin${PATH:+:${PATH}}"
