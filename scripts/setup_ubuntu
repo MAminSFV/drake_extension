@@ -4,7 +4,7 @@
 set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt-get update
+apt-get update
 apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
   build-essential
@@ -25,7 +25,7 @@ wget -qO- https://drake-apt.csail.mit.edu/drake.asc | gpg --dearmor - \
 echo "deb [arch=amd64] https://drake-apt.csail.mit.edu/$(lsb_release -cs) $(lsb_release -cs) main" \
   | tee /etc/apt/sources.list.d/drake.list >/dev/null
 
-sudo apt-get update
+apt-get update
 apt-get install --no-install-recommends -y drake-dev
 
 export PATH="/opt/drake/bin${PATH:+:${PATH}}"
