@@ -7,4 +7,5 @@ from numpy import float_
 from numpy.typing import NDArray
 from pydrake.systems.framework import LeafSystem
 
+from . import custom_system
 from .custom_system import SimpleAdder
