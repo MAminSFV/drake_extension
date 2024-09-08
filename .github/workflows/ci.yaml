@@ -20,9 +20,11 @@ jobs:
         python-version: '3.12'
     - name: Build and Install
       run: |
+        python3 -m venv .venv
         source .venv/bin/activate
-        python -m pip install pytest
-        python -m pip install --verbose .
+        python3 -m pip3 install nanobind
+        python3 -m pip3 install pytest
+        python3 -m pip3 install --verbose .
 
     - name: Test
       run: python -m pytest
