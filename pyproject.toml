@@ -16,7 +16,7 @@ classifiers = [
 ]
 dependencies = [
   "drake",
-  "numpy"
+  "numpy>=1.21,<2"
 ]
 
 [project.urls]
