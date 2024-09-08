@@ -33,5 +33,7 @@ export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}
 
 locale-gen en_US.UTF-8
 
-# Install nanobind globally
-python3 -m pip install nanobind
+# Install nanobind in a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install nanobind
