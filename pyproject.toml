@@ -14,9 +14,9 @@ authors = [
 classifiers = [
     "License :: MIT License"
 ]
-dependencies = [
-  "drake",
-]
+#dependencies = [
+#  "drake",
+#]
 
 [project.urls]
 Homepage = "https://github.com/MAminSFV/drake_extension"
