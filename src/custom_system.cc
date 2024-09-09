@@ -33,8 +33,6 @@ class SimpleAdder : public LeafSystem<T> {
 NB_MODULE(custom_system, m) {
   m.doc() = "Example module interfacing with pydrake and Drake C++";
 
-  nb::module_ m = nb::module_::import_("pydrake.systems.framework");
-
   using T = double;
 
   nb::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
