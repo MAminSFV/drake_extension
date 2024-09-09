@@ -1,8 +1,4 @@
-#include <nanobind/nanobind.h>
 #include <drake/systems/framework/leaf_system.h>
-
-namespace nb = nanobind;
-using namespace nb::literals;
 
 using drake::systems::BasicVector;
 using drake::systems::Context;
@@ -29,12 +25,3 @@ class SimpleAdder : public LeafSystem<T> {
 
   const T add_{};
 };
-
-NB_MODULE(custom_system, m) {
-  m.doc() = "Example module interfacing with pydrake and Drake C++";
-
-  using T = double;
-
-  nb::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
-      .def(nb::init<T>(), nb::arg("add"));
-}
