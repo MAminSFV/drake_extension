@@ -14,10 +14,6 @@ authors = [
 classifiers = [
     "License :: MIT License"
 ]
-dependencies = [
-  "drake",
-  "numpy"
-]
 
 [project.optional-dependencies]
 test = ["pytest"]
