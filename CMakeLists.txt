@@ -58,7 +58,7 @@ target_link_libraries(drake_extension_ext PUBLIC pybind11::headers drake::drake)
 set_target_properties(drake_extension_ext PROPERTIES CXX_VISIBILITY_PRESET default)
 
 # This is passing in the version as a define just as an example
-target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
+target_compile_definitions(drake_extension_ext PRIVATE VERSION_INFO=${PROJECT_VERSION})
 
 # Install directive for scikit-build-core
 install(TARGETS drake_extension_ext LIBRARY DESTINATION drake_extension)
