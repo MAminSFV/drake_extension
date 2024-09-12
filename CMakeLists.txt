@@ -41,8 +41,7 @@ include(CTest)
 find_package(drake CONFIG REQUIRED)
 
 # Try to import all Python components potentially needed by nanobind
-find_package(Python 3.10
-  REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
 execute_process(COMMAND ${Python3_EXECUTABLE}-config --exec-prefix
