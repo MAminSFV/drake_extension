@@ -1,3 +1,4 @@
-__all__ = ["SimpleAdder"]
+from __future__ import annotations
+from .drake_extension_ext import SimpleAdder
 
-from .drake_extension import SimpleAdder
+__all__ = ["SimpleAdder"]
