@@ -22,7 +22,7 @@ jobs:
       run: |
         python3 -m venv .venv
         source .venv/bin/activate
-        python3 -m pip install nanobind
+        python3 -m pip install pybind11
         python3 -m pip install pytest
         python3 -m pip install --verbose .
 

@@ -1,3 +1,4 @@
+import numpy as np
 from drake_extension import SimpleAdder
 
 from pydrake.systems.analysis import Simulator
@@ -24,4 +25,4 @@ def test_custom_system():
 
     x = logger.FindLog(simulator.get_context()).data()
     print("Output values: {}".format(x))
-    #assert np.allclose(x, 110.)
+    assert np.allclose(x, 110.)

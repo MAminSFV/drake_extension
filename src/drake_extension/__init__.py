@@ -1,3 +1,3 @@
 __all__ = ["SimpleAdder"]
 
-from .custom_system import SimpleAdder
+from .drake_extension import SimpleAdder

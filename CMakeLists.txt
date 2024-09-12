@@ -1,6 +1,15 @@
-# Inspired and adapted from https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
-cmake_minimum_required(VERSION 3.16...3.26)
-project(drake_extension CXX)
+# Inspired and adapted from:
+# https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
+# and
+# https://github.com/pybind/scikit_build_example/blob/master/CMakeLists.txt
+cmake_minimum_required(VERSION 3.16...3.27)
+
+# Scikit-build-core sets these values for you, or you can just hard-code the
+# name and version.
+project(
+  ${SKBUILD_PROJECT_NAME}
+  VERSION ${SKBUILD_PROJECT_VERSION}
+  LANGUAGES CXX)
 
 
 if (NOT SKBUILD)
@@ -33,41 +42,23 @@ find_package(drake CONFIG REQUIRED)
 
 # Try to import all Python components potentially needed by nanobind
 find_package(Python 3.12
-  REQUIRED COMPONENTS Interpreter Development.Module
-  OPTIONAL_COMPONENTS Development.SABIModule)
-
-# Import nanobind through CMake's find_package mechanism
-find_package(nanobind CONFIG REQUIRED)
+  REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(pybind11 CONFIG REQUIRED)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-add_library(custom_system STATIC src/custom_system.cpp)
-target_link_libraries(custom_system PUBLIC drake::drake)
-set_target_properties(custom_system PROPERTIES CXX_VISIBILITY_PRESET default)
 
-nanobind_add_module(
-    # Name of the extension
-    drake_extension_ext
-    # Target the stable ABI for Python 3.12+, which reduces
-    # the number of binary wheels that must be built. This
-    # does nothing on older Python versions
-    STABLE_ABI
-    # Build libnanobind statically and merge it into the
-    # extension (which itself remains a shared library)
-    #
-    # If your project builds multiple extensions, you can
-    # replace this flag by NB_SHARED to conserve space by
-    # reusing a shared libnanobind across libraries
-    NB_STATIC
-
-    # Source code goes here
-    src/drake_extension_ext.cc)
-
-target_link_libraries(drake_extension_ext PUBLIC custom_system)
+# Add a library using FindPython's tooling (pybind11 also provides a helper like
+# this)
+python_add_library(drake_extension_ext MODULE src/drake_extension_ext.cpp WITH_SOABI)
+target_link_libraries(drake_extension_ext PUBLIC pybind11::headers drake::drake)
 set_target_properties(drake_extension_ext PROPERTIES CXX_VISIBILITY_PRESET default)
+
+# This is passing in the version as a define just as an example
+target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
 
 # Install directive for scikit-build-core
 install(TARGETS drake_extension_ext LIBRARY DESTINATION drake_extension)
