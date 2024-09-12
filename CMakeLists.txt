@@ -41,7 +41,7 @@ include(CTest)
 find_package(drake CONFIG REQUIRED)
 
 # Try to import all Python components potentially needed by nanobind
-find_package(Python 3.12
+find_package(Python 3.10
   REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
