@@ -25,6 +25,7 @@ jobs:
         python3 -m pip install pybind11
         python3 -m pip install pytest
         python3 -m pip install numpy
+        python3 -m pip install drake
         python3 -m pip install --verbose .
 
     - name: Test
