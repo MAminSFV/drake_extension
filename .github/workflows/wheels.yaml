@@ -15,7 +15,7 @@ jobs:
     - name: Initial Setup
       run: sudo bash ./scripts/setup_ubuntu
 
-    - name: Initial Setup + Build wheels
+    - name: Build wheels
       uses: pypa/cibuildwheel@v2.21.0
       with:
         package-dir: .
