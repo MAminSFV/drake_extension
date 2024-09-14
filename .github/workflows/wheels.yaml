@@ -15,12 +15,18 @@ jobs:
     - name: Initial Setup
       run: sudo bash ./scripts/setup_ubuntu
 
-    - uses: actions/checkout@v4
-    - uses: pypa/cibuildwheel@v2.17
-      env:
-        PATH: "/opt/drake/bin${PATH:+:${PATH}}"
-        PYTHONPATH: "/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
-        LD_LIBRARY_PATH: "/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+    - name: Install cibuildwheel
+      run: pip3 install cibuildwheel==2.17.0
+
+    - name: Build wheels
+      run: |
+        export PATH="/opt/drake/bin${PATH:+:${PATH}}"
+        export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
+        export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+        python3 -m cibuildwheel --output-dir wheelhouse
+      # to supply options, put them in 'env', like:
+      # env:
+      #   CIBW_SOME_OPTION: value
 
     - name: Verify clean directory
       run: git diff --exit-code
