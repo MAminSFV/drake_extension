@@ -28,7 +28,7 @@ jobs:
         name: drake_extension_jammy_py310
         path: wheels/*.whl
 
-  build_wheels:
+  test_wheels:
     needs: build_wheels
     runs-on: ubuntu-22.04
     steps:
