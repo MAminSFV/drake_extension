@@ -39,8 +39,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add a library using FindPython's tooling (pybind11 also provides a helper like
 # this)
-pybind11_add_module(_ext MODULE src/ext.cpp WITH_SOABI)
-target_link_libraries(_ext PUBLIC drake::drake)
+python_add_library(_ext MODULE src/ext.cpp WITH_SOABI)
+target_link_libraries(_ext PUBLIC drake::drake pybind11::headers)
 set_target_properties(_ext PROPERTIES CXX_VISIBILITY_PRESET default)
 
 # This is passing in the version as a define just as an example
