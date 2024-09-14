@@ -13,17 +13,13 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Initial Setup
-      run: |
-        sudo bash ./scripts/setup_ubuntu
-        pip3 install cibuildwheel
-        export PATH="/opt/drake/bin${PATH:+:${PATH}}"
-        export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
-        export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-        pip3 wheel . -w ./wheels
-        pip3 install auditwheel
-        auditwheel repair ./wheels/drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
+      run: sudo bash ./scripts/setup_ubuntu
 
-
+    - name: Initial Setup + Build wheels
+      uses: pypa/cibuildwheel@v2.21.0
+      with:
+        package-dir: .
+        output-dir: wheels
 
     - name: Upload wheels
       uses: actions/upload-artifact@v4
