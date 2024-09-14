@@ -3,7 +3,7 @@
 
 set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
-
+apt install apt
 apt-get update
 apt-get install --no-install-recommends -y $(cat <<EOF
   ca-certificates
