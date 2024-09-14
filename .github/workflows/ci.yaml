@@ -24,13 +24,7 @@ jobs:
         pip3 install --verbose .[test]
         py.test
 
-  build_wheels:
-    name: Wheels on for Jammy (py310)
-    runs-on: ubuntu-22.04
-
-    steps:
-    - uses: actions/checkout@v4
-
+    - name: Package using Wheel
     - uses: pypa/cibuildwheel@v2.17
 
     - name: Verify clean directory
