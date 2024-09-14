@@ -28,7 +28,7 @@ get_filename_component(PYTHONPATH
 
 # Find the module development requirements (requires FindPython from 3.17 or
 # scikit-build-core's built-in backport)
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+#find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -39,8 +39,9 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add a library using FindPython's tooling (pybind11 also provides a helper like
 # this)
-python3_add_library(_ext MODULE src/ext.cpp WITH_SOABI)
-target_link_libraries(_ext PUBLIC drake::drake pybind11::headers)
+#python3_add_library(_ext MODULE src/ext.cpp WITH_SOABI)
+#target_link_libraries(_ext PUBLIC drake::drake pybind11::headers)
+pybind11_add_module(_ext MODULE src/ext.cpp)
 set_target_properties(_ext PROPERTIES CXX_VISIBILITY_PRESET default)
 
 # This is passing in the version as a define just as an example
