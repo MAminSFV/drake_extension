@@ -36,6 +36,9 @@ filterwarnings = [
 ]
 testpaths = ["tests"]
 
+[tool.scikit-build]
+cmake.verbose = true
+logging.level = "INFO"
 
 [tool.cibuildwheel]
 build-frontend = "build[uv]"

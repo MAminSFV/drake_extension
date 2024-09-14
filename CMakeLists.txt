@@ -15,11 +15,6 @@ include(CTest)
 option(RUN_X11_TESTS "Run tests that require X11" OFF)
 find_package(drake CONFIG REQUIRED)
 
-# Find the module development requirements (requires FindPython from 3.17 or
-# scikit-build-core's built-in backport)
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
-find_package(pybind11 CONFIG REQUIRED)
-
 execute_process(COMMAND ${Python3_EXECUTABLE}-config --exec-prefix
   OUTPUT_VARIABLE PYTHON_EXEC_PREFIX
   OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -30,6 +25,11 @@ get_filename_component(PYTHONPATH
   "${drake_DIR}/../../python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}/site-packages"
   REALPATH
 )
+
+# Find the module development requirements (requires FindPython from 3.17 or
+# scikit-build-core's built-in backport)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(pybind11 CONFIG REQUIRED)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
