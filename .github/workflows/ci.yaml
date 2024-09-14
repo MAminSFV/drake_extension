@@ -18,12 +18,8 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-    - name: Build and Install
+    - name: Build, Install and Test
       run: |
-        pip3 install pybind11[global]
-        pip3 install pytest
+        pip3 install pybind11[global] pytest
         pip3 install --verbose .[test]
-
-    - name: Test
-      run: |
         py.test
