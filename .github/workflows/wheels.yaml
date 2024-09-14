@@ -38,5 +38,5 @@ jobs:
           path: ./test
       - name: Install and test
         run: |
-          pip3 install ./test/drake_extension_jammy_py310.whl
+          pip3 install ./test/drake_extension_jammy_py310
           python3 -c 'import drake_extension'
