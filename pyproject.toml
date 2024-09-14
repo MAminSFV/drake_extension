@@ -40,12 +40,6 @@ filterwarnings = [
 ]
 testpaths = ["tests"]
 
-
-[tool.cibuildwheel]
-test-command = "pytest {project}/tests"
-test-extras = ["test"]
-before-build = "rm -rf {project}/build"
-
 [tool.ruff]
 src = ["src"]
 target-version = "py310"

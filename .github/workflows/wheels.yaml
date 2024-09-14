@@ -25,5 +25,6 @@ jobs:
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
-        name: cibw-wheels-jammy_py310
+        name: drake_extension_jammy_py310
         path: wheels/*.whl
+
