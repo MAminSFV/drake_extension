@@ -22,7 +22,6 @@ jobs:
       run: |
         python3 -m pip install pybind11[global]
         python3 -m pip install pytest
-        python3 -m pip install numpy
         python3 -m pip install --verbose .[test]
 
     - name: Test
