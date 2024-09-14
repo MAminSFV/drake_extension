@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          pattern: drake_extension_jammy_py310.whl
+          pattern: drake_extension_jammy_py310
           path: ./test
       - name: Install and test
         run: |
