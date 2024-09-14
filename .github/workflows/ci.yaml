@@ -24,7 +24,6 @@ jobs:
         pip3 install --verbose .[test]
         py.test
 
-    - name: Package using Wheel
     - uses: pypa/cibuildwheel@v2.17
 
     - name: Verify clean directory
