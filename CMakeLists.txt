@@ -6,12 +6,14 @@ cmake_minimum_required(VERSION 3.16...3.27)
 
 # Scikit-build-core sets these values for you, or you can just hard-code the
 # name and version.
-project(drake_extension LANGUAGES CXX)
+project(
+  ${SKBUILD_PROJECT_NAME}
+  VERSION ${SKBUILD_PROJECT_VERSION}
+  LANGUAGES CXX)
 
 include(CTest)
 option(RUN_X11_TESTS "Run tests that require X11" OFF)
 find_package(drake CONFIG REQUIRED)
-find_package(pybind11 CONFIG REQUIRED)
 
 execute_process(COMMAND ${Python3_EXECUTABLE}-config --exec-prefix
   OUTPUT_VARIABLE PYTHON_EXEC_PREFIX
@@ -24,6 +26,11 @@ get_filename_component(PYTHONPATH
   REALPATH
 )
 
+# Find the module development requirements (requires FindPython from 3.17 or
+# scikit-build-core's built-in backport)
+#find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(pybind11 CONFIG REQUIRED)
+
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -32,6 +39,14 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add a library using FindPython's tooling (pybind11 also provides a helper like
 # this)
-pybind11_add_module(drake_extension MODULE src/drake_extension.cpp)
-target_link_libraries(drake_extension PUBLIC drake::drake)
-set_target_properties(drake_extension PROPERTIES CXX_VISIBILITY_PRESET default)
+#python3_add_library(_ext MODULE src/ext.cpp WITH_SOABI)
+#target_link_libraries(_ext PUBLIC drake::drake pybind11::headers)
+pybind11_add_module(_ext MODULE src/ext.cpp)
+target_link_libraries(_ext PUBLIC drake::drake)
+set_target_properties(_ext PROPERTIES CXX_VISIBILITY_PRESET default)
+
+# This is passing in the version as a define just as an example
+target_compile_definitions(_ext PRIVATE VERSION_INFO=${PROJECT_VERSION})
+
+# The install directory is the output (wheel) directory
+install(TARGETS _ext DESTINATION drake_extension)

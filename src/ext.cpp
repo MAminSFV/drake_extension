@@ -6,6 +6,9 @@
 #include <pybind11/pybind11.h>
 #include <drake/systems/framework/leaf_system.h>
 
+#define STRINGIFY(x) #x
+#define MACRO_STRINGIFY(x) STRINGIFY(x)
+
 namespace py = pybind11;
 
 using drake::systems::BasicVector;
@@ -37,7 +40,7 @@ class SimpleAdder : public LeafSystem<T> {
 };
 
 
-PYBIND11_MODULE(drake_extension , m) {
+PYBIND11_MODULE(_ext , m) {
   m.doc() = "Example module interfacing with pydrake and Drake C++";
 
   py::module::import("pydrake.systems.framework");
@@ -46,6 +49,12 @@ PYBIND11_MODULE(drake_extension , m) {
 
   py::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
       .def(py::init<T>(), py::arg("add"));
+
+  #ifdef VERSION_INFO
+    m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+  #else
+    m.attr("__version__") = "dev";
+  #endif
 }
 
 }  // namespace drake_extension
