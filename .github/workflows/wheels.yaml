@@ -25,7 +25,7 @@ jobs:
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
-        name: drake_extension_jammy_py310
+        name: drake_extension_jammy_py310.whl
         path: wheels/*.whl
 
   test_wheels:
@@ -34,9 +34,10 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          pattern: drake_extension_jammy_py310
-          path: ./test
+          name: drake_extension_jammy_py310.whl
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Install and test
         run: |
-          pip3 install ./test/drake_extension_jammy_py310
+          pip3 install ./drake_extension_jammy_py310
           python3 -c 'import drake_extension'
