@@ -15,7 +15,6 @@ jobs:
     - name: Initial Setup
       run: |
         sudo bash ./scripts/setup_ubuntu
-        pip3 install cibuildwheel
         export PATH="/opt/drake/bin${PATH:+:${PATH}}"
         export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
         export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
@@ -39,5 +38,6 @@ jobs:
         run: ls -R
       - name: Install and test
         run: |
+          sudo bash ./scripts/setup_ubuntu
           pip3 install ./drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
           python3 -c 'import drake_extension'
