@@ -6,17 +6,11 @@ cmake_minimum_required(VERSION 3.16...3.27)
 
 # Scikit-build-core sets these values for you, or you can just hard-code the
 # name and version.
-project(
-  ${SKBUILD_PROJECT_NAME}
-  VERSION ${SKBUILD_PROJECT_VERSION}
-  LANGUAGES CXX)
+project(drake_extension LANGUAGES CXX)
 
 include(CTest)
-
+option(RUN_X11_TESTS "Run tests that require X11" OFF)
 find_package(drake CONFIG REQUIRED)
-
-# Try to import all Python components potentially needed by nanobind
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
 execute_process(COMMAND ${Python3_EXECUTABLE}-config --exec-prefix
@@ -38,12 +32,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add a library using FindPython's tooling (pybind11 also provides a helper like
 # this)
-pybind11_add_module(drake_extension_ext MODULE src/drake_extension_ext.cpp)
-target_link_libraries(drake_extension_ext PUBLIC drake::drake)
-set_target_properties(drake_extension_ext PROPERTIES CXX_VISIBILITY_PRESET default)
-
-# This is passing in the version as a define just as an example
-target_compile_definitions(drake_extension_ext PRIVATE VERSION_INFO=${PROJECT_VERSION})
-
-# Install directive for scikit-build-core
-install(TARGETS drake_extension_ext LIBRARY DESTINATION drake_extension)
+pybind11_add_module(drake_extension MODULE src/drake_extension.cpp)
+target_link_libraries(drake_extension PUBLIC drake::drake)
+set_target_properties(drake_extension PROPERTIES CXX_VISIBILITY_PRESET default)

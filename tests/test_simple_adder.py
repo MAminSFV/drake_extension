@@ -1,4 +1,4 @@
-#import numpy as np
+import numpy as np
 from drake_extension import SimpleAdder
 
 from pydrake.systems.analysis import Simulator
