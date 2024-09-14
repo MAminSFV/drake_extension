@@ -135,7 +135,6 @@ setup(
     ext_modules=[CMakeExtension("drake_extension")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
-    extras_require={"test": ["pytest>=6.0"],
-                    "pydrake": ["pydrake>=1.20"]},
+    extras_require={"test": ["pytest>=6.0"]},
     python_requires=">=3.10",
 )
