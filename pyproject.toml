@@ -48,13 +48,9 @@ test-skip = ["*universal2:arm64"]
 # Setuptools bug causes collision between pypy and cpython artifacts
 before-build = "rm -rf {project}/build"
 before-all = ["export PATH="/opt/drake/bin${PATH:+:${PATH}}"",
-              "export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"",
+              "export PYTHONPATH="/opt/drake/lib/python3.10/site-packages${PYTHONPATH:+:${PYTHONPATH}}"",
               "export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}""]
 environment-pass = ["PATH", "PYTHONPATH", "LD_LIBRARY_PATH"]
-
-
-
-
 
 
 [tool.ruff]
