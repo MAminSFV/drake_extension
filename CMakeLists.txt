@@ -42,6 +42,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 #python3_add_library(_ext MODULE src/ext.cpp WITH_SOABI)
 #target_link_libraries(_ext PUBLIC drake::drake pybind11::headers)
 pybind11_add_module(_ext MODULE src/ext.cpp)
+target_link_libraries(_ext PUBLIC drake::drake)
 set_target_properties(_ext PROPERTIES CXX_VISIBILITY_PRESET default)
 
 # This is passing in the version as a define just as an example
