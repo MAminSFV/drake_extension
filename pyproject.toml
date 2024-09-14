@@ -42,7 +42,6 @@ testpaths = ["tests"]
 
 
 [tool.cibuildwheel]
-build-frontend = "pip"
 test-command = "pytest {project}/tests"
 test-extras = ["test"]
 before-build = "rm -rf {project}/build"
