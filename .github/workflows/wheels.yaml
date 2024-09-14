@@ -16,10 +16,10 @@ jobs:
       run: sudo bash ./scripts/setup_ubuntu
 
     - name: Build wheels
-      uses: pypa/cibuildwheel@v2.21.0
-      with:
-        package-dir: .
-        output-dir: wheels
+      run: |
+        pip3 install cibuildwheel
+        cibuildwheel --output-dir ./wheels/
+
 
     - name: Upload wheels
       uses: actions/upload-artifact@v4
