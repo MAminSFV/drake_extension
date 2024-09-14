@@ -39,5 +39,5 @@ jobs:
         run: ls -R
       - name: Install and test
         run: |
-          pip3 install ./drake_extension_jammy_py310
+          pip3 install ./drake_extension_jammy_py310.whl
           python3 -c 'import drake_extension'
