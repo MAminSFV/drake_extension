@@ -20,9 +20,9 @@ jobs:
         python-version: '3.10'
     - name: Build and Install
       run: |
-        python3 -m pip install pybind11[global]
-        python3 -m pip install pytest
-        python3 -m pip install --verbose .[test]
+        pip3 install pybind11[global]
+        pip3 install pytest
+        pip3 install --verbose .[test]
 
     - name: Test
       run: |
