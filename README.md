@@ -47,9 +47,7 @@ py.test
 ```
 
 ## TODOs
-- [ ] Add Github Actions to Automated Testing
 - [ ] Add a Dockerfile for more reproducibility and transparency of the setup
-- [ ] Try `nanobind` and compare resulting binary sizes with `pybind`
 - [ ] Add information about how to shared the packaged python wheel.
 - [ ] Clean up of the generic CMake file and pyproject.
 - [ ] Try binding whole diagrams and objects in Drake.
