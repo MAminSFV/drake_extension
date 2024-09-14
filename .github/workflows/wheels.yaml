@@ -21,7 +21,7 @@ jobs:
         export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
         pip3 wheel . -w ./wheels
         pip3 install auditwheel
-        auditwheel repair drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
+        auditwheel repair ./wheels/drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
 
 
 
