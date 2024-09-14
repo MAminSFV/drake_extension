@@ -6,6 +6,9 @@
 #include <pybind11/pybind11.h>
 #include <drake/systems/framework/leaf_system.h>
 
+#define STRINGIFY(x) #x
+#define MACRO_STRINGIFY(x) STRINGIFY(x)
+
 namespace py = pybind11;
 
 using drake::systems::BasicVector;
