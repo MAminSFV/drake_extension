@@ -46,6 +46,12 @@ PYBIND11_MODULE(drake_extension , m) {
 
   py::class_<SimpleAdder<T>, LeafSystem<T>>(m, "SimpleAdder")
       .def(py::init<T>(), py::arg("add"));
+
+  #ifdef VERSION_INFO
+    m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+  #else
+    m.attr("__version__") = "dev";
+  #endif
 }
 
 }  // namespace drake_extension
