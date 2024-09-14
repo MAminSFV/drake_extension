@@ -1,6 +1,11 @@
 [build-system]
-requires = ["scikit-build-core>=0.3.3", "pybind11"]
-build-backend = "scikit_build_core.build"
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "ninja",
+    "cmake>=3.12",
+]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "drake_extension"
@@ -21,11 +26,6 @@ test = ["pytest"]
 [project.urls]
 Homepage = "https://github.com/MAminSFV/drake_extension"
 
-
-[tool.scikit-build]
-wheel.expand-macos-universal-tags = true
-
-
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
@@ -42,6 +42,7 @@ testpaths = ["tests"]
 build-frontend = "build[uv]"
 test-command = "pytest {project}/tests"
 test-extras = ["test"]
+before-build = "rm -rf {project}/build"
 
 [tool.cibuildwheel.pyodide]
 environment.CFLAGS = "-fexceptions"
@@ -50,6 +51,7 @@ build-frontend = {name = "build", args = ["--exports", "whole_archive"]}
 
 [tool.ruff]
 src = ["src"]
+target-version = "py310"
 
 [tool.ruff.lint]
 extend-select = [

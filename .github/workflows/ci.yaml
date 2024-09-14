@@ -20,13 +20,12 @@ jobs:
         python-version: '3.10'
     - name: Build and Install
       run: |
-        ${Python3_EXECUTABLE} -m pip install pybind11
-        ${Python3_EXECUTABLE} -m pip install pytest
-        ${Python3_EXECUTABLE} -m pip install numpy
-        ${Python3_EXECUTABLE} -m pip install --verbose .
+        python3 -m pip install pybind11
+        python3 -m pip install pytest
+        python3 -m pip install --verbose .
 
     - name: Test
       run: |
         source .venv/bin/activate
         export LD_LIBRARY_PATH="/opt/drake/lib:$LD_LIBRARY_PATH"
-        ${Python3_EXECUTABLE} -m pytest
+        python3 -m pytest

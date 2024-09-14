@@ -12,8 +12,7 @@ apt-get install --no-install-recommends -y $(cat <<EOF
   gnupg
   cmake
   lsb-release
-  python3-pip
-  python3-venv
+  python3-dev
   locales
 EOF
 )
