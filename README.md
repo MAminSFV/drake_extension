@@ -16,7 +16,7 @@ If you think the current setup can be improved, please open an issue or a pull r
 
 ## Setup Guide
 > [!NOTE]
-> The setup has only been tested with Ubuntu 22.04 (Jammy) operating system, Python 3.12 and Drake v1.32.0
+> The setup has only been tested with Ubuntu 22.04 (Jammy) operating system, Python 3.10 and Drake v1.32.0
 > If you encountered any issues feel free to leave an issue so we can fix it together.
 > You are also welcome to make a PR and extend the support.
 
@@ -47,10 +47,8 @@ py.test
 ```
 
 ## TODOs
-- [ ] Add a Dockerfile for more reproducibility and transparency of the setup
+- [ ] Add a Dockerfile for more reproducibility of the setup.
 - [ ] Add information about how to shared the packaged python wheel.
-- [ ] Clean up of the generic CMake file and pyproject.
-- [ ] Try binding whole diagrams and objects in Drake.
 
 
 ## References
