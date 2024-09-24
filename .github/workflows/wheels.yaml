@@ -14,6 +14,7 @@ jobs:
 
     - name: Initial Setup
       run: |
+        sudo bash ./scripts/setup_ubuntu.sh
         sudo bash ./scripts/build_wheel.sh
 
 

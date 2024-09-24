@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Initial Setup
-      run: sudo bash ./scripts/setup_ubuntu
+      run: sudo bash ./scripts/setup_ubuntu.sh
 
     - name: Build, Install and Test
       run: |
