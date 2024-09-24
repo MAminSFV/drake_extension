@@ -24,12 +24,6 @@ jobs:
         name: drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
         path: dist/*.whl
 
-    - name: Upload wheels
-      uses: actions/upload-artifact@v4
-      with:
-        name: install_dependencies
-        path: ./scripts/setup_ubuntu
-
   test_wheels:
     needs: build_wheels
     runs-on: ubuntu-22.04
