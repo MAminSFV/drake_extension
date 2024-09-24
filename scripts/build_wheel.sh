@@ -2,6 +2,16 @@
 # Inspired by https://github.com/RobotLocomotion/drake/blob/master/tools/wheel/image/build-wheel.sh
 set -eu -o pipefail
 
+# Get the full path to the script
+SCRIPT_PATH=$(realpath "$0")
+
+# Get the directory containing the script
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+SRC_DIR=$(dirname "$SCRIPT_DIR")
+
+echo "Script path: $SCRIPT_PATH"
+echo "Script directory: $SCRIPT_DIR"
+echo "Source directory: $SRC_DIR"
 # Helper function to change the RPATH of libraries. The first argument is the
 # (origin-relative) new RPATH to be added. Remaining arguments are libraries to
 # be modified. Note that existing RPATH(s) are removed (except for homebrew
@@ -18,12 +28,12 @@ chrpath()
 }
 
 ###############################################################################
-bash ./scripts/setup_ubuntu
+#bash ./scripts/setup_ubuntu
 export PATH="/opt/drake/bin${PATH:+:${PATH}}"
 export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
 export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
-readonly WHEEL_DIR=${GITHUB_WORKSPACE}/wheels
+readonly WHEEL_DIR=${SRC_DIR}/wheels
 readonly WHEEL_SHARE_DIR=${WHEEL_DIR}/pydrake/share
 
 # TODO(mwoehlke-kitware) Most of this should move to Bazel.
@@ -42,12 +52,11 @@ cp -r -t ${WHEEL_DIR}/pydrake \
 cp -r -t ${WHEEL_DIR}/pydrake/lib \
     /opt/drake/lib/libdrake*.so
 
-cp -r -t ${WHEEL_DIR}/pydrake \
-    /opt/drake-wheel-content/*
-
 ###############################################################################
-python3 setup.py bdist_wheel
+cd ${SRC_DIR}
+python3 -m pip install build auditwheel patchelf
+python3 -m build --wheel
 
- GLIBC_VERSION=$(ldd --version | sed -n '1{s/.* //;s/[.]/_/p}')
+GLIBC_VERSION=$(ldd --version | sed -n '1{s/.* //;s/[.]/_/p}')
 
-auditwheel repair --plat manylinux_${GLIBC_VERSION}_x86_64 dist/drake_extenstion_*.whl
+auditwheel repair --plat manylinux_${GLIBC_VERSION}_x86_64 dist/drake_extension*.whl

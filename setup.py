@@ -4,16 +4,39 @@ import subprocess
 import sys
 from pathlib import Path
 
-from setuptools import Extension, setup
+from setuptools import Extension, setup, find_packages, glob
 from setuptools.command.build_ext import build_ext
 
-# Convert distutils Windows platform specifiers to CMake -A arguments
-PLAT_TO_CMAKE = {
-    "win32": "Win32",
-    "win-amd64": "x64",
-    "win-arm32": "ARM",
-    "win-arm64": "ARM64",
-}
+# Required python packages that will be pip installed along with pydrake
+#python_required = [
+#    'matplotlib',
+#    'numpy',
+#    'pydot',
+#    'PyYAML',
+#]
+
+def find_data_files(*patterns):
+    result = []
+    for pattern in patterns:
+        result += [f'../{f}' for f in glob.iglob(pattern, recursive=True)]
+    return result
+
+def _actually_find_packages():
+    """Work around broken(?!) setuptools."""
+    result = find_packages()
+    result.extend([
+        'wheels.pydrake.autodiffutils',
+        'wheels.pydrake.common',
+        'wheels.pydrake.examples',
+        'wheels.pydrake.geometry',
+        'wheels.pydrake.manipulation',
+        'wheels.pydrake.math',
+        'wheels.pydrake.solvers',
+        'wheels.pydrake.symbolic',
+        'wheels.pydrake.visualization',
+    ])
+    print(f'Using packages={result}')
+    return result
 
 
 # A CMakeExtension needs a sourcedir instead of a file list.
@@ -132,9 +155,24 @@ setup(
     author_email="safavi.m.amin@gmail.com",
     description="A template project to extend Drake using pybind11 and CMake",
     long_description="",
+    platforms=['linux_x86_64'],
     ext_modules=[CMakeExtension("drake_extension")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
     extras_require={"test": ["pytest>=6.0"]},
     python_requires=">=3.10",
+    packages=_actually_find_packages(),
+    # Add in any packaged data.
+    include_package_data=True,
+    package_data={
+        '': find_data_files(
+            'pydrake/py.typed',
+            'pydrake/**/*.pyi',
+            'pydrake/**/*.so',
+            'pydrake/lib/**',
+            'pydrake/doc/**',
+            'pydrake/share/**',
+            'pydrake/INSTALLATION',
+        )
+    },
 )
