@@ -17,7 +17,6 @@ jobs:
         sudo bash ./scripts/setup_ubuntu.sh
         sudo bash ./scripts/build_wheel.sh
 
-
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
@@ -36,6 +35,5 @@ jobs:
         run: ls -R
       - name: Install and test
         run: |
-          sudo bash setup_ubuntu.sh
           pip3 install ./drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
           python3 -c 'import drake_extension'
