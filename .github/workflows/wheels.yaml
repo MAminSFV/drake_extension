@@ -31,9 +31,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
-      - uses: actions/download-artifact@v4
-        with:
-          name: install_dependencies
 
       - name: Display structure of downloaded files
         run: ls -R
