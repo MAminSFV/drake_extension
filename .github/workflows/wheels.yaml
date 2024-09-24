@@ -36,7 +36,6 @@ jobs:
         run: ls -R
       - name: Install and test
         run: |
-          sudo bash setup_ubuntu
-          pip3 install drake
+          sudo bash setup_ubuntu.sh
           pip3 install ./drake_extension-0.0.1-cp310-cp310-linux_x86_64.whl
           python3 -c 'import drake_extension'
